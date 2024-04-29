@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LibraryManagementSystem_Client.Models.Author>
+
+@{
+    ViewData["Title"] = "Author Page";
+}
+
+<h1>Author</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("#")
+            </th>
+            <th>
+                @Html.DisplayName("Author Name")
+            </th>
+            <th>
+                @Html.DisplayName("Author Bio")
+            </th>
+            <th>@Html.DisplayName("Action")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+            {
+                <tr>
+                    <td>
+                        @item.Index
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.AuthorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.AuthorBio)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Value.AuthorID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Value.AuthorID })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

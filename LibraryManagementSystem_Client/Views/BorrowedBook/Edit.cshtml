@@ -1,0 +1,72 @@
+﻿@model LibraryManagementSystem_Client.Models.BorrowedBook
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>BorrowedBook</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BorrowID" class="control-label"></label>
+                <input asp-for="BorrowID" class="form-control" />
+                <span asp-validation-for="BorrowID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookId" class="control-label">Title</label>
+                <select asp-for="BookId" class="form-control" asp-items="@(new SelectList(ViewBag.Books, "BookID", "Title"))">
+                    <option value="">-- Select Book --</option>
+                </select>
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BorrowDate" class="control-label"></label>
+                @{
+                    string formattedDate = Model.BorrowDate.ToString("yyyy-MM-dd");
+                }
+                <input asp-for="BorrowDate" class="form-control" type="date" value="@formattedDate" />
+                <span asp-validation-for="BorrowDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label">MemberName</label>
+                <select asp-for="MemberId" class="form-control" asp-items="@(new SelectList(ViewBag.Members, "MemberID", "MemberName"))">
+                    <option value="">-- Select Member --</option>
+                </select>
+
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label"></label>
+                @{
+                    string returndDate = Model.ReturnDate.ToString("yyyy-MM-dd");
+                }
+                <input asp-for="ReturnDate" class="form-control" type="date" value="@returndDate" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="Borrowed">Borrowed</option>
+                    <option value="Returned">Returned</option>
+                    <option value="Overdue">Overdue</option>
+                </select>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

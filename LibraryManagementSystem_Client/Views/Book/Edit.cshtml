@@ -1,0 +1,68 @@
+﻿@model LibraryManagementSystem_Client.Models.Book
+
+@{
+    ViewData["Title"] = "Edit Page";
+}
+
+<h1>Edit</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookID" class="control-label"></label>
+                <input asp-for="BookID" class="form-control" />
+                <span asp-validation-for="BookID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PublishedDate" class="control-label"></label>
+                @{
+                    string formattedDate = Model.PublishedDate.ToString("yyyy-MM-dd");
+                }
+                <input asp-for="PublishedDate" class="form-control" type="Date" value="@formattedDate" />
+                <span asp-validation-for="PublishedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableCopies" class="control-label"></label>
+                <input asp-for="AvailableCopies" class="form-control" />
+                <span asp-validation-for="AvailableCopies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ISBN" class="control-label"></label>
+                <input asp-for="ISBN" class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalCopies" class="control-label"></label>
+                <input asp-for="TotalCopies" class="form-control" />
+                <span asp-validation-for="TotalCopies" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorID" class="control-label">Author</label>
+                <select asp-for="AuthorID" class="form-control" asp-items="@(new SelectList(ViewBag.Authors, "AuthorID", "AuthorName"))">
+                    <option value="">-- Select Author --</option>
+                </select>
+                <span asp-validation-for="AuthorID" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
