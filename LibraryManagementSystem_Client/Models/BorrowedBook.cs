@@ -8,7 +8,7 @@ namespace LibraryManagementSystem_Client.Models
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BorrowDate { get; set; }
         public int MemberId { get; set; }
-        public string? MemberName { get; set; }
+        public string? MemberFullName { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ReturnDate { get; set; }
         public int BookId { get; set; }
